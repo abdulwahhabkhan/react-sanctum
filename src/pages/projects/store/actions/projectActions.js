@@ -1,6 +1,6 @@
 import * as PActions from './index'
 import projects from '../../../../services/projects'
-import storage from "../../../../Config/storage";
+import storage from "../../../../config/storage";
 import {filters} from "../../config";
 
 export function getProjects(params){

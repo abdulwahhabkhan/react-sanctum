@@ -3,6 +3,8 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import './style/App.scss';
 import { Sanctum } from "react-sanctum";
 import Layout from './layout/layout'
+import {Provider} from 'react-redux';
+import store from "./store";
 
 const sanctumConfig = {
   api_url: process.env.REACT_APP_API_DOMAIN,
@@ -14,11 +16,13 @@ const sanctumConfig = {
 
 function App() {
   return (
-    <Router>
-      <Sanctum config={sanctumConfig}>
-        <Layout />
-      </Sanctum>
-    </Router>
+      <Provider store={store}>
+        <Router>
+          <Sanctum config={sanctumConfig}>
+            <Layout />
+          </Sanctum>
+        </Router>
+      </Provider>
   );
 }
 

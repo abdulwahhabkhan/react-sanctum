@@ -2,10 +2,9 @@ import axios from "axios"
 import {store as exception} from '../components/ui/exceptionmodal'
 
 const ApiService = axios.create();
-
-
-
-axios.interceptors.response.use(response => {
+ApiService.defaults.baseURL = process.env.REACT_APP_API_DOMAIN+"/api/";
+ApiService.defaults.withCredentials = true;
+ApiService.interceptors.response.use(response => {
     return response;
 }, err => {
     //const dispatch = useDispatch()

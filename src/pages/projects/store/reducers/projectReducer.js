@@ -1,6 +1,7 @@
 import * as PActions from "../actions";
-import storage from "../../../../Config/storage";
+import storage from "../../../../config/storage";
 import {filters, pagination} from '../../config'
+
 export const initialState = {
     loading: false,
     sortBy: storage.get(PActions.PROJECT_SORT) || 'id',

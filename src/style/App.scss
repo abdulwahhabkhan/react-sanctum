@@ -44,6 +44,8 @@ $menu-width: 300px;
 $color-text: #6a6c6f;
 $tab_active: $golden;
 $tab_hover: #6d6f80;
+$progress-bg: #bfbfc4;
+
 @import "~bootstrap/scss/bootstrap";
 @import "loading";
 @import "sidebar";
