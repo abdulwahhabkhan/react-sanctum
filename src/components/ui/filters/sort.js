@@ -4,6 +4,7 @@ import {faArrowDown, faArrowUp} from "@fortawesome/free-solid-svg-icons";
 import Dropdown from 'react-bootstrap/Dropdown'
 import './Sort.scss'
 import PropTypes from 'prop-types'
+import {Button, ButtonGroup} from "react-bootstrap";
 
 const Sort = ({
     sortOrder = 'asc',
@@ -24,8 +25,8 @@ const Sort = ({
     });
     return(
         <Fragment>
-            <div className="sort-filter">
-                <Dropdown className={'btn-group'} alignRight>
+            <ButtonGroup className="sort-filter">
+                <Dropdown as={ButtonGroup} alignRight>
                     <Dropdown.Toggle variant="default" size={'sm'}>
                         <span className={'text-bold'}>Sort By: </span>
                         { selected ? selected.text: 'Default' }
@@ -35,10 +36,10 @@ const Sort = ({
                         {ddOptions}
                     </Dropdown.Menu>
                 </Dropdown>
-                <button className="btn btn-default btn-sm" onClick={()=>orderHandler(sortOrder)} title={'Sort order is: ' + (sortOrder === 'asc' ? 'Ascending' : 'Descending')}>
+                <Button variant={"default"} size={"sm"} onClick={()=>orderHandler(sortOrder)} title={'Sort order is: ' + (sortOrder === 'asc' ? 'Ascending' : 'Descending')}>
                     <FontAwesomeIcon icon={sortIcon} />
-                </button>
-            </div>
+                </Button>
+            </ButtonGroup>
         </Fragment>
     )
 
