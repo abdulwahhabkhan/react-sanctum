@@ -1,0 +1,54 @@
+/*
+@tailwind base;
+@tailwind components;
+@tailwind utilities;*/
+$font-weight-base:400;
+$golden: #ec8a2a;
+$blue-900: #07305d;
+$blue-500: #265c99;
+$body-bg: rgb(243, 244, 246);
+$body-color: #6a6c6f;
+$navbar-dark-color:rgb(31, 41, 55);
+$gray-800:rgba(31, 41, 55, 1);
+$navbar-dark-brand-color: rgba(255, 255, 255, 1);
+$navbar-dark-active-color: $golden;
+$navbar-dark-color: rgba(255, 255, 255, 1);
+$navbar-dark-hover-color:$golden;
+$h1-font-size:3rem;
+$h2-font-size:2.25rem;
+$h3-font-size:1.5rem;
+$container-max-width:1530px;
+$input-focus-color:inherit;
+$input-focus-bg:#fff;
+$input-focus-border-color:$blue-500;
+$input-focus-box-shadow:none;
+$card-border-radius:0.35rem;
+$container-max-widths: (
+        sm: 540px,
+        md: 720px,
+        lg: 960px,
+        xl: 1530px
+);
+$theme-colors: (
+    "primary": $blue-500,
+    "danger": #e74c5e,
+    "success": #47bd9a,
+    "info": #06c2de,
+    "warning": #f9d570,
+    "light": #e9ecef,
+    "dark": $blue-900,
+    "default": #fff,
+);
+
+$menu-width: 300px;
+$color-text: #6a6c6f;
+$tab_active: $golden;
+$tab_hover: #6d6f80;
+@import "~bootstrap/scss/bootstrap";
+@import "loading";
+@import "sidebar";
+@import "tabs";
+@import "panels";
+@import "projects";
+@import "style";
+

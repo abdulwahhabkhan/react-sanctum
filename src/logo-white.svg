@@ -1,7 +1,7 @@
 <svg class="block h-9 w-auto" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#fff" version="1.1" width="100%"
      height="100%" viewBox="0 0 637 637">
 
-    <g transform="scale(8.100147275405007) translate(8, 10)" fill="#fff">
+    <g transform="scale(8.100147275405007) translate(8, 10)">
         <defs id="SvgjsDefs1021"></defs>
         <g id="SvgjsG1022"
            transform="matrix(0.11296931199986888,0,0,0.11296931199986888,-2.3377126323130217,-5.687358702171256)"
@@ -9,7 +9,7 @@
             <metadata xmlns="http://www.w3.org/2000/svg">Created by potrace 1.14, written by Peter Selinger 2001-2017
             </metadata>
             <g xmlns="http://www.w3.org/2000/svg" transform="translate(0.000000,600.000000) scale(0.100000,-0.100000)"
-               fill="#ec8a2a" stroke="none">
+               fill="#fff" stroke="none">
                 <path
                     d="M3160 5494 c-413 -40 -538 -58 -1080 -155 -155 -28 -278 -43 -395 -50 -93 -6 -180 -14 -193 -20 -60 -24 -71 -138 -43 -444 30 -320 43 -400 117 -725 123 -538 223 -920 259 -995 31 -64 95 -145 114 -145 4 0 7 69 7 153 l-1 152 -107 325 c-219 667 -274 863 -318 1130 -37 217 -49 440 -28 480 l14 25 149 -3 c114 -3 223 4 450 27 611 62 636 63 949 62 323 -2 380 -8 585 -61 132 -35 148 -36 177 -12 36 29 51 64 53 123 3 86 -10 96 -144 114 -109 15 -478 27 -565 19z"></path>
                 <path

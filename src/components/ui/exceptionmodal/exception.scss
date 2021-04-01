@@ -1,0 +1,15 @@
+$color-red-deep:#c0392b;
+.exception {
+  .modal-content {
+    border: none;
+    box-shadow: 0 0 1px rgba(0,0,0,0.1),0 2px 4px rgba(0,0,0,0.2);
+    border-radius: 0px;
+    .status-line{
+      background: $color-red-deep;
+      height: 6px;
+    }
+    .modal-header{
+      color:$color-red-deep
+    }
+  }
+}

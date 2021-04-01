@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import {BrowserRouter as Router} from 'react-router-dom';
+import './style/App.scss';
+import { Sanctum } from "react-sanctum";
+import Layout from './layout/layout'
+
+const sanctumConfig = {
+  api_url: process.env.REACT_APP_API_DOMAIN,
+  csrf_cookie_route: "sanctum/csrf-cookie",
+  signin_route: "login",
+  signout_route: "logout",
+  user_object_route: "api/user",
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Sanctum config={sanctumConfig}>
+        <Layout />
+      </Sanctum>
+    </Router>
   );
 }
 

@@ -1,0 +1,16 @@
+
+.blank-slate{
+  margin-top: 30px;
+  .slate-body{
+    max-width: 552px; margin:0px auto;
+    padding:20px;
+    text-align: center;
+    .slate-image{
+      margin-bottom: 20px;
+    }
+    .slate-text{
+      padding-bottom: 20px; font-size: 18px;
+      a{color:$color-green;}
+    }
+  }
+}
