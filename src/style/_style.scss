@@ -1,3 +1,4 @@
+$color-text:#333 !default;
 
 html, body{
   font-family: 'Source Sans Pro', sans-serif !important;
@@ -48,6 +49,31 @@ html, body{
     &.active{
       color: white;
       background-color: #337ab7;
+    }
+  }
+}
+
+.popover-actions{
+  text-align: center;
+  list-style: none; margin-bottom: 0px;
+  padding-left: 0px;
+  li {
+    width: 90px;
+    padding: 5px;
+    text-align: center;
+    font-size: 11px;
+    border-radius: 5px;
+    color: $color-text;
+    display: block;
+    cursor: pointer;
+    svg {
+      padding: 2px;
+      display: block;
+      margin: 0px auto;
+      color: $color-text;
+    }
+    &:hover{
+      background-color: #eee;
     }
   }
 }

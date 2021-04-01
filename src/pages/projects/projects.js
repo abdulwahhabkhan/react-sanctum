@@ -63,6 +63,16 @@ const Projects = ()=>{
         //this.props.applyOrder(norder)
         //this.getProjects({orderBy:norder })
     }
+    const editProjectHandler = (project)=>{
+
+    }
+    const deleteProjectHandler = (id)=>{
+        //ask for confirmation and delete the project
+
+    }
+    const completeProjectHandler = (id)=>{
+
+    }
 
     return(
         <>
@@ -111,7 +121,11 @@ const Projects = ()=>{
                                 projects.map((project, index)=>{
                                     return (
                                         <Col lg={4} className={'projects'} key={index}>
-                                            <ProjectWidget project={project} />
+                                            <ProjectWidget
+                                                onEdit={editProjectHandler}
+                                                onDelete={deleteProjectHandler}
+                                                onComplete={completeProjectHandler}
+                                                project={project} />
                                         </Col>
                                     )
                                 })

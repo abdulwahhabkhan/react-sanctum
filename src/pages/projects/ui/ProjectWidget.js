@@ -58,7 +58,7 @@ const ProjectWidget =(props) => {
                                         &nbsp;
                                     </div>
 
-                                    {/*<OverlayTrigger
+                                    <OverlayTrigger
                                     //trigger={['focus', 'click']}
                                     placement="left"
                                     show={show}
@@ -87,7 +87,7 @@ const ProjectWidget =(props) => {
                                     <button className={'btn btn-sm btn-circle btn-default'} onClick={handleClick}>
                                         <FontAwesomeIcon icon={faEllipsisV} />
                                     </button>
-                                </OverlayTrigger>*/}
+                                </OverlayTrigger>
 
                                 </Col>
                             </Row>
