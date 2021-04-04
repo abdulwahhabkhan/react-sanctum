@@ -8,13 +8,14 @@ import {ProjectWidget} from "./ui"
 import SortFilter from "../../components/ui/filters/sort";
 import {useDispatch, useSelector} from "react-redux"
 import {getProjects, applyOrder, applySort} from "./store/actions";
+import {LoadingSpinner} from "../../components/ui/loader";
 //import ApiService from "../../services/ApiService";
 
 //import {applyfilters, applyOrder, applySort, getProjects} from './store/actions'
 
 const Projects = ()=>{
     const projectsStore = useSelector(state => state.projects.project);
-    const {sortBy, orderBy, rows, pagination, filters} = projectsStore
+    const {sortBy, orderBy, rows, pagination, filters, loading} = projectsStore
     const location = useLocation()
     const dispatch = useDispatch()
     const completed = location.pathname ==="/projects/current" ? 0 : 1
@@ -84,7 +85,9 @@ const Projects = ()=>{
                     </div>
                     <div className="tab-content">
                         <Row>
-                            {}
+                            {loading === true &&(
+                                <LoadingSpinner delay={1.2*1000} />
+                            )}
                             <Col sm={12}>
                                 <div className="list-options">
                                     <div>{ pagination.totalRecords } results</div>
