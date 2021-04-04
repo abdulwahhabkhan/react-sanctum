@@ -1,34 +1,22 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faPlusCircle} from "@fortawesome/free-solid-svg-icons"
 import {Col, Row} from "react-bootstrap"
-import {Redirect, useLocation} from "react-router"
+import {useLocation} from "react-router"
 import {NavLink} from "react-router-dom"
 import {ProjectWidget} from "./ui"
 import SortFilter from "../../components/ui/filters/sort";
 import {useDispatch, useSelector} from "react-redux"
-import {getProjects} from "./store/actions";
-import ApiService from "../../services/ApiService";
+import {getProjects, applyOrder, applySort} from "./store/actions";
+//import ApiService from "../../services/ApiService";
 
 //import {applyfilters, applyOrder, applySort, getProjects} from './store/actions'
 
 const Projects = ()=>{
     const projectsStore = useSelector(state => state.projects.project);
-    const {sortBy, orderBy, filters} = projectsStore
-    const [projects, setProjects] = useState([]);
-    const [pagination, setPagination] = useState({totalRecords: 0});
-
+    const {sortBy, orderBy, rows, pagination, filters} = projectsStore
     const location = useLocation()
-    /*if(location.pathname === "/projects")
-        return(
-            <Redirect
-                to={{
-                    pathname: "/projects/current",
-                    search: "",
-                    state: { referrer: location.pathname }
-                }}
-            />
-        )*/
+    const dispatch = useDispatch()
     const completed = location.pathname ==="/projects/current" ? 0 : 1
     const pageHeading = completed ? "Completed Projects" : "Current Projects"
     const sortOptions = [
@@ -40,28 +28,22 @@ const Projects = ()=>{
     ];
 
     useEffect(()=>{
-        //dispatch = useDispatch(getProjects());
-        (
-            async () => {
-                const {data} = await ApiService.get(`projects?completed=${completed}`);
-                setProjects(data.data)
-                setPagination({totalRecords: data.total})
-            }
-
-        )()
-    }, [completed])
+        dispatch(getProjects({
+            completed: completed
+        }))
+        return () => {
+            //
+        };
+    }, [dispatch, completed, filters, orderBy, sortBy])
 
 
     const sortHandler = (option) =>{
-        //this.props.applySort(option.value)
-        //this.getProjects({sortBy:option.value })
+        dispatch(applySort(option.value))
     }
 
-    const sortOrderHandler= (sorder) =>{
-        const order = sorder === 'asc' ? 'desc' : 'asc';
-        console.log(order)
-        //this.props.applyOrder(norder)
-        //this.getProjects({orderBy:norder })
+    const sortOrderHandler= (sOrder) =>{
+        const order = sOrder === 'asc' ? 'desc' : 'asc';
+        dispatch(applyOrder(order))
     }
     const editProjectHandler = (project)=>{
 
@@ -102,6 +84,7 @@ const Projects = ()=>{
                     </div>
                     <div className="tab-content">
                         <Row>
+                            {}
                             <Col sm={12}>
                                 <div className="list-options">
                                     <div>{ pagination.totalRecords } results</div>
@@ -118,7 +101,7 @@ const Projects = ()=>{
                         </Row>
                         <Row>
                             {
-                                projects.map((project, index)=>{
+                                rows.map((project, index)=>{
                                     return (
                                         <Col lg={4} className={'projects'} key={index}>
                                             <ProjectWidget

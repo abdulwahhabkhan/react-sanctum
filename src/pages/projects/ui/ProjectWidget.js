@@ -32,7 +32,7 @@ const ProjectWidget =(props) => {
                                     </div>
                                     {}
                                     <small>{ props.project.owner &&
-                                    <Avatar name={props.project.owner.name} size="25"
+                                    <Avatar name={props.project.owner.name} src={props.project.owner.profile_photo_url} size="25"
                                             textSizeRatio={1.2}
                                             round={true} style={{fontFamily:'inherit'}} />
                                     }</small>

@@ -3,6 +3,7 @@ import projects from '../../../../services/projects'
 import storage from "../../../../config/storage";
 import {filters} from "../../config";
 
+
 export function getProjects(params){
     const queryString = {
         ...params
@@ -10,6 +11,7 @@ export function getProjects(params){
     return (dispatch)=>{
         dispatch({type:PActions.LOADING_PROJECTS})
         projects.getProjects(queryString).then(res => {
+            //dispatch({type:PActions.LOADING_PROJECTS})
             return dispatch({type: PActions.GET_PROJECTS,  payload: res})
         })
     }

@@ -1,12 +1,13 @@
-import * as axios from "../ApiService";
+import ApiService from "../ApiService";
 
 
 
 class Projects {
 
     getProject = (id)=>{
+        console.log("Get Project called");
         return new Promise((resolve, reject)=>{
-            axios({
+            ApiService({
                 method: 'get',
                 url: 'project/'+id
             }).then(response => {
@@ -25,7 +26,7 @@ class Projects {
         const params = {completed:0, sort: 'id', order: 'asc', ...filters};
         const qry_str = Object.keys(params).map(key => key.toLowerCase() + "="+encodeURI(params[key])).join('&');
         return new Promise((resolve, reject)=>{
-            axios({
+            ApiService({
                 method: 'get',
                 url: 'projects?'+qry_str
             }).then(response => {
@@ -44,7 +45,7 @@ class Projects {
         const method = data.id ? 'PUT' : 'POST';
         const url = data.id ? 'project/'+data.id : 'project'
         return new Promise((resolve, reject)=>{
-            axios({
+            ApiService({
                 method: method,
                 url: url,
                 data: data
@@ -59,7 +60,7 @@ class Projects {
     completeProject = (data)=>{
         const url =  'project/'+data.id+'/complete'
         return new Promise((resolve, reject)=>{
-            axios({
+            ApiService({
                 method: 'PUT',
                 url: url,
                 data: data
