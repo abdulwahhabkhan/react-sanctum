@@ -27,7 +27,7 @@ const Sort = ({
         <Fragment>
             <ButtonGroup className="sort-filter">
                 <Dropdown as={ButtonGroup} alignRight>
-                    <Dropdown.Toggle variant="default" size={'sm'}>
+                    <Dropdown.Toggle variant="grey" size={'sm'}>
                         <span className={'text-bold'}>Sort By: </span>
                         { selected ? selected.text: 'Default' }
                     </Dropdown.Toggle>
@@ -36,7 +36,7 @@ const Sort = ({
                         {ddOptions}
                     </Dropdown.Menu>
                 </Dropdown>
-                <Button variant={"default"} size={"sm"} onClick={()=>orderHandler(sortOrder)} title={'Sort order is: ' + (sortOrder === 'asc' ? 'Ascending' : 'Descending')}>
+                <Button variant={"grey"} size={"sm"} onClick={()=>orderHandler(sortOrder)} title={'Sort order is: ' + (sortOrder === 'asc' ? 'Ascending' : 'Descending')}>
                     <FontAwesomeIcon icon={sortIcon} />
                 </Button>
             </ButtonGroup>
