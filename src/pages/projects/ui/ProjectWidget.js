@@ -84,7 +84,7 @@ const ProjectWidget =(props) => {
                                         </Popover>
                                     }
                                 >
-                                    <button className={'btn btn-sm btn-circle btn-default'} onClick={handleClick}>
+                                    <button className={'btn btn-sm btn-circle btn-grey'} onClick={handleClick}>
                                         <FontAwesomeIcon icon={faEllipsisV} />
                                     </button>
                                 </OverlayTrigger>
