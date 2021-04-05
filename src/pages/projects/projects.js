@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {lazy, Suspense, useEffect, useState} from 'react'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faPlusCircle} from "@fortawesome/free-solid-svg-icons"
 import {Col, Row} from "react-bootstrap"
@@ -9,6 +9,8 @@ import SortFilter from "../../components/ui/filters/sort";
 import {useDispatch, useSelector} from "react-redux"
 import {getProjects, applyOrder, applySort} from "./store/actions";
 import {LoadingSpinner} from "../../components/ui/loader";
+
+const ProjectForm = lazy(() => import("./projectform"))
 //import ApiService from "../../services/ApiService";
 
 //import {applyfilters, applyOrder, applySort, getProjects} from './store/actions'
@@ -16,6 +18,7 @@ import {LoadingSpinner} from "../../components/ui/loader";
 const Projects = ()=>{
     const projectsStore = useSelector(state => state.projects.project);
     const {sortBy, orderBy, rows, pagination, filters, loading} = projectsStore
+    const [showForm, setShowForm] = useState(0)
     const location = useLocation()
     const dispatch = useDispatch()
     const completed = location.pathname ==="/projects/current" ? 0 : 1
@@ -42,12 +45,19 @@ const Projects = ()=>{
         dispatch(applySort(option.value))
     }
 
+    const addProjectHandler = ()=>{
+        setShowForm(true)
+    }
+
     const sortOrderHandler= (sOrder) =>{
         const order = sOrder === 'asc' ? 'desc' : 'asc';
         dispatch(applyOrder(order))
     }
     const editProjectHandler = (project)=>{
 
+    }
+    const projectFormHandler = (flag)=>{
+        setShowForm(flag)
     }
     const deleteProjectHandler = (id)=>{
         //ask for confirmation and delete the project
@@ -64,7 +74,7 @@ const Projects = ()=>{
                     <div className="list-options">
                         <div className="title">{pageHeading}</div>
                         <div className="btn-options text-right">
-                            <button className="btn btn-sm btn-primary w-10">
+                            <button className="btn btn-sm btn-primary w-10" onClick={addProjectHandler}>
                                 <FontAwesomeIcon icon={faPlusCircle} />&nbsp;
                                 Add Project
                             </button>
@@ -119,24 +129,16 @@ const Projects = ()=>{
                         </Row>
                     </div>
                 </Col>
-
+                {
+                    showForm === true && (
+                        <Suspense fallback={<div>loading form..</div>}>
+                            <ProjectForm show={true} project={''} onClose={projectFormHandler} />
+                        </Suspense>
+                    )
+                }
             </div>
         </>
     )
 }
-
-/*function mapDispatchToProps(dispatch) {
-    return {
-        loadProjects: params => dispatch(getProjects(params)),
-        applySort: params => dispatch(applySort(params)),
-        applyOrder: params => dispatch(applyOrder(params)),
-        resetFilters: params=> dispatch(applyfilters(params))
-    };
-}
-const mapStateToProps = state => {
-    return {
-        projects :  state.projects.project
-    };
-}*/
 
 export default Projects
