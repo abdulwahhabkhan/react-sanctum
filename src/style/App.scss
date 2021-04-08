@@ -49,10 +49,12 @@ $tab_hover: #6d6f80;
 $progress-bg: #bfbfc4;
 
 @import "~bootstrap/scss/bootstrap";
+@import "~react-bootstrap-range-slider/dist/react-bootstrap-range-slider.scss";
 @import "loading";
 @import "sidebar";
 @import "tabs";
 @import "panels";
 @import "projects";
+
 @import "style";
 
