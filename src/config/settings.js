@@ -2,12 +2,11 @@
 const title = process.env.REACT_APP_APPLICATION_NAME;
 const settings = {
     APPNAME : title,
-    DATEFROMAT: 'MMM Do YYYY',
-    FULLDATEFROMAT: 'dd Do MMMM YYYY, hh:mmA',
-    FORMDATEFROMAT: 'dd/MM/yyyy',
-    FORM_DATE_FROMAT: 'DD/MM/YYYY',
-    TIMEFROMAT: 'hh:mm a',
-    FROMFUllFROMAT: 'MM/DD/YYYY hh:mm a',
+    DATE_FORMAT: 'MMM Do YYYY',
+    FULL_DATE_FORMAT: 'dd Do MMMM YYYY, hh:mmA',
+    FORM_DATE_FORMAT: 'DD/MM/YYYY',
+    TIME_FORMAT: 'hh:mm a',
+    FROM_FUll_FORMAT: 'MM/DD/YYYY hh:mm a',
     hideSideBar: false,
     sidebarMinified: localStorage.getItem('sidebar_minified') ? (localStorage.getItem('sidebar_minified') === 'true')  : false,
     setTitle: (t)=>{

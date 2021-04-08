@@ -44,7 +44,7 @@ const ProjectWidget =React.memo((props) => {
                                         </div>
 
                                         <Moment
-                                            format={settings.DATEFROMAT}
+                                            format={settings.DATE_FORMAT}
                                             date={props.project.end_date}/>
 
                                     </Col>

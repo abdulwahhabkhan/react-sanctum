@@ -4,6 +4,8 @@ import ButtonLoader from "../../components/form/ButtonLoader"
 import { useForm, Controller } from "react-hook-form"
 import ReactSelect  from "react-select"
 import RangeSlider from 'react-bootstrap-range-slider'
+import DateTimeInput from "../../components/form/DateTimeInput";
+
 //import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.scss'
 
 const ProjectForm  =(props)=>{
@@ -12,7 +14,7 @@ const ProjectForm  =(props)=>{
     const [progress, setProgress] = useState(0)
     const activeTab = "description";
     const owner = {"id":1, "name":'Default'}
-    const { register, handleSubmit, control} = useForm();
+    const { register, handleSubmit, control, errors} = useForm();
     const users = [{"id":1, "name":'Default'},{"id":2, "name":'Abdul'}]
     const submitForm = (data) => {
         console.log({...data, progress:progress})
@@ -32,7 +34,8 @@ const ProjectForm  =(props)=>{
                             <Form.Label>Project title is:</Form.Label>
                             <Form.Control
                                 name={'name'}
-                                ref={register}
+                                ref={register({required:true})}
+                                isInvalid={errors.name}
                                 placeholder={'like react application'}/>
                             <Form.Control.Feedback type={'invalid'}>Required</Form.Control.Feedback>
                         </Form.Group>
@@ -52,14 +55,24 @@ const ProjectForm  =(props)=>{
                                         <Col sm={6}>
                                             <Form.Group>
                                                 <Form.Label>Start Date</Form.Label>
-
+                                                <DateTimeInput
+                                                    name={'start_date'}
+                                                    size={'md'}
+                                                    register={register}
+                                                    initialValue={''}
+                                                />
 
                                             </Form.Group>
                                         </Col>
                                         <Col sm={6}>
                                             <Form.Group>
                                                 <Form.Label>End Date</Form.Label>
-
+                                                <DateTimeInput
+                                                    name={'end_date'}
+                                                    size={'md'}
+                                                    register={register}
+                                                    initialValue={''}
+                                                />
                                             </Form.Group>
                                         </Col>
                                     </Row>
@@ -94,24 +107,7 @@ const ProjectForm  =(props)=>{
                                         <Col>
                                             <Form.Group>
                                                 <Form.Label>Project Progress:</Form.Label>
-                                                <Controller
-                                                    name={'progress2'}
-                                                    control={control}
-                                                    value={progress}
-                                                    onChange={(e)=>{ setProgress(e.target.value) } }
-                                                    render={({ field }) => <RangeSlider
-                                                        {...field}
-                                                        step={5}
-                                                        size={'lg'}
-
-
-
-                                                        //onChange={(e)=>{ setProgress(e.target.value) } }
-                                                        tooltipLabel={currentValue => `${currentValue}%`}
-                                                        tooltip='on'
-                                                    />}
-                                                />
-                                                {/*<RangeSlider
+                                                <RangeSlider
                                                     step={5}
                                                     size={'lg'}
                                                     value={progress}
@@ -120,7 +116,7 @@ const ProjectForm  =(props)=>{
                                                     onChange={(e)=>{ setProgress(e.target.value) } }
                                                     tooltipLabel={currentValue => `${currentValue}%`}
                                                     tooltip='on'
-                                                />*/}
+                                                />
                                             </Form.Group>
                                         </Col>
                                     </Row>
