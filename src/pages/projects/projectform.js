@@ -1,11 +1,12 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import {Button, Modal, Form, Tabs, Tab, Row, Col} from "react-bootstrap"
 import ButtonLoader from "../../components/form/ButtonLoader"
 import { useForm, Controller } from "react-hook-form"
 import ReactSelect  from "react-select"
 import RangeSlider from 'react-bootstrap-range-slider'
 import DateTimeInput from "../../components/form/DateTimeInput";
-
+import {useDispatch} from "react-redux";
+import user from "../../services/users"
 //import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.scss'
 
 const ProjectForm  =(props)=>{
@@ -15,7 +16,13 @@ const ProjectForm  =(props)=>{
     const activeTab = "description";
     const owner = {"id":1, "name":'Default'}
     const { register, handleSubmit, control, errors} = useForm();
-    const users = [{"id":1, "name":'Default'},{"id":2, "name":'Abdul'}]
+    const [users, setUsers] = useState([])
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        user.getUsers().then(response=>{
+            setUsers(response)
+        })
+    },[])
     const submitForm = (data) => {
         console.log({...data, progress:progress})
     }
