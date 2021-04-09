@@ -96,7 +96,7 @@ const Projects = ()=>{
                     <div className="tab-content">
                         <Row>
                             {loading === true &&(
-                                <LoadingSpinner delay={1.2*1000} />
+                                <LoadingSpinner delay={1.5*1000} />
                             )}
                             <Col sm={12}>
                                 <div className="list-options">
@@ -114,7 +114,7 @@ const Projects = ()=>{
                         </Row>
                         <Row>
                             {
-                                rows.map((project, index)=>{
+                                !loading && rows.map((project, index)=>{
                                     return (
                                         <Col lg={4} className={'projects'} key={index}>
                                             <ProjectWidget
