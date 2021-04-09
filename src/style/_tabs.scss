@@ -33,10 +33,11 @@ $tab_hover:#00acac5c !default;
 }
 .nav-htabs{
   position: relative;
-  box-shadow: 1px 1px 6px rgba(0,0,0,.16);
-  border-radius: 5px;
+
   .nav-tabs{
     margin-bottom: 10px;
+    box-shadow: 1px 1px 6px rgba(0,0,0,.16);
+    border-radius: 5px;
   }
   .nav-tabs .nav-link{
     border: 0;
