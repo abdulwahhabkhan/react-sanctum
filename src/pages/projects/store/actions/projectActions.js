@@ -18,7 +18,9 @@ export function getProjects(params){
 }
 
 export function addProject(data) {
-
+    projects.saveProject(data).then(res=>{
+        return res
+    })
 }
 
 export function editProject(data) {

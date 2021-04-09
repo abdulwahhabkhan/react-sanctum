@@ -4,9 +4,9 @@ import ButtonLoader from "../../components/form/ButtonLoader"
 import { useForm, Controller } from "react-hook-form"
 import ReactSelect  from "react-select"
 import RangeSlider from 'react-bootstrap-range-slider'
-import DateTimeInput from "../../components/form/DateTimeInput";
-import {useDispatch} from "react-redux";
+import DateTimeInput from "../../components/form/DateTimeInput"
 import user from "../../services/users"
+import ApiService, {getCSRFCookie} from "../../services/ApiService"
 //import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.scss'
 
 const ProjectForm  =(props)=>{
@@ -14,21 +14,33 @@ const ProjectForm  =(props)=>{
     const [loading, setLoading] = useState(false)
     const [progress, setProgress] = useState(0)
     const activeTab = "description";
-    const owner = {"id":1, "name":'Default'}
+    //const [owner, setOwner] = useState(null)
     const { register, handleSubmit, control, errors} = useForm();
     const [users, setUsers] = useState([])
-    const dispatch = useDispatch()
+
     useEffect(()=>{
         user.getUsers().then(response=>{
             setUsers(response)
         })
     },[])
-    const submitForm = (data) => {
-        console.log({...data, progress:progress})
-    }
-    const updateOwnerHandler = ()=>{
+    const submitForm = async (data) => {
+        let post_data = {...data, progress:progress, owner: data.owner ? data.owner.id : null};
+        setLoading(true)
+        await getCSRFCookie().catch(exp=>{
+            console.log(exp)
+        })
+        await ApiService.post("projects", post_data).then(res=>{
 
+        }).catch(exp=>{
+            console.log({...exp.response.data})
+        }).finally(()=>{
+            setLoading(false)
+        })
     }
+    /*const updateOwnerHandler = (val, {action})=>{
+        console.log(val, action)
+    }*/
+
     return(
         <>
             <Modal show={props.show} size={'lg'} keyboard={true} onHide={()=> props.onClose(false)}>
@@ -99,11 +111,11 @@ const ProjectForm  =(props)=>{
                                                     primary: '#265c99b3',
                                                 },
                                             })}
+                                            defaultValue={[]}
                                             isClearable
-                                            defaultValue={[owner]}
                                             getOptionValue={option => option['id']}
                                             getOptionLabel={option => option['name']}
-                                            onChange={updateOwnerHandler}
+                                            //onInputChange={updateOwnerHandler}
                                             name={'owner'}
                                             control={control}
                                         />

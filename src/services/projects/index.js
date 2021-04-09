@@ -1,11 +1,10 @@
-import ApiService from "../ApiService";
+import {ApiService, getCSRFCookie} from "../ApiService";
 
 
 
 class Projects {
 
     getProject = (id)=>{
-        console.log("Get Project called");
         return new Promise((resolve, reject)=>{
             ApiService({
                 method: 'get',
@@ -41,9 +40,11 @@ class Projects {
         })
     }
 
-    saveProject = (data)=>{
+    saveProject = async (data)=>{
         const method = data.id ? 'PUT' : 'POST';
-        const url = data.id ? 'project/'+data.id : 'project'
+        const url = data.id ? 'projects/'+data.id : 'projects'
+
+        await getCSRFCookie()
         return new Promise((resolve, reject)=>{
             ApiService({
                 method: method,
