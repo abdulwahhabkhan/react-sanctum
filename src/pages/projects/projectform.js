@@ -43,7 +43,7 @@ const ProjectForm  =(props)=>{
 
     return(
         <>
-            <Modal show={props.show} size={'lg'} keyboard={true} onHide={()=> props.onClose(false)}>
+            <Modal show={props.show} backdrop="static" size={'lg'} keyboard={true} onHide={()=> props.onClose(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
