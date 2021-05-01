@@ -71,6 +71,23 @@ $color-text: #000 !default;
     line-height: 1.428571429;
   }
 }
+.dropdown-actions {
+  .dropdown-toggle{
+    &::before{
+      content: none;
+    }
+  }
+  .dropdown-menu{
+    .dropdown-item{
+      padding: 0.25rem 1rem;
+      .svg-icon{
+        width: 1rem;
+        margin: 0 0.75rem 0 0;
+      }
+
+    }
+  }
+}
 @media(max-width:768px) {
   .projects .project-info {
     text-align: left;
