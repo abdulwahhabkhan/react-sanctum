@@ -9,6 +9,7 @@ import SortFilter from "../../components/ui/filters/sort";
 import {useDispatch, useSelector} from "react-redux"
 import {getProjects, applyOrder, applySort} from "./store/actions";
 import {LoadingSpinner} from "../../components/ui/loader";
+import ApiService from "../../services/ApiService";
 
 const ProjectForm = lazy(() => import("./projectform"))
 //import ApiService from "../../services/ApiService";
@@ -19,6 +20,7 @@ const Projects = ()=>{
     const projectsStore = useSelector(state => state.projects.project);
     const {sortBy, orderBy, rows, pagination, filters, loading} = projectsStore
     const [showForm, setShowForm] = useState(0)
+    const [project, setProject] = useState({})
     const location = useLocation()
     const dispatch = useDispatch()
     const completed = location.pathname ==="/projects/current" ? 0 : 1
@@ -45,7 +47,22 @@ const Projects = ()=>{
         dispatch(applySort(option.value))
     }
 
+    const getProject = async (id) =>{
+        if(id === 0)
+            return
+
+        await ApiService.get("projects/"+ id).then(res=>{
+            setProject(res.data)
+            setShowForm(true)
+        }).catch(exp=>{
+            console.log({...exp})
+        }).finally(()=>{
+
+        })
+    }
+
     const addProjectHandler = ()=>{
+        setProject({})
         setShowForm(true)
     }
 
@@ -53,8 +70,8 @@ const Projects = ()=>{
         const order = sOrder === 'asc' ? 'desc' : 'asc';
         dispatch(applyOrder(order))
     }
-    const editProjectHandler = (project)=>{
-
+    const editProjectHandler = (projectId)=>{
+        getProject(projectId)
     }
     const projectFormHandler = (flag)=>{
         setShowForm(flag)
@@ -132,7 +149,7 @@ const Projects = ()=>{
                 {
                     showForm === true && (
                         <Suspense fallback={<div>loading form..</div>}>
-                            <ProjectForm show={true} project={''} onClose={projectFormHandler} />
+                            <ProjectForm show={true} project={project} onClose={projectFormHandler} />
                         </Suspense>
                     )
                 }

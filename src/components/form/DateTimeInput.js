@@ -1,5 +1,6 @@
 import React from "react"
 import Datetime from 'react-datetime'
+import moment from 'moment';
 import "react-datetime/css/react-datetime.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faCalendar} from "@fortawesome/free-solid-svg-icons"
@@ -28,7 +29,7 @@ const DateTimeInput =({name, size, register, initialValue, updateDate})=>{
 
     return(
         <Datetime
-            initialValue={initialValue}
+            initialValue={moment(initialValue).format(settings.FORM_DATE_FORMAT)}
             renderInput={renderInput}
             inputProps={{className: 'form-control form-control-'+size, ref: register, name:name, placeholder:'Select date'}}
             onChange={updateDate}
