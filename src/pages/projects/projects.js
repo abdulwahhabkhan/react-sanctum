@@ -74,6 +74,7 @@ const Projects = ()=>{
         getProject(projectId)
     }
     const projectFormHandler = (flag)=>{
+        setProject([])
         setShowForm(flag)
     }
     const deleteProjectHandler = (id)=>{

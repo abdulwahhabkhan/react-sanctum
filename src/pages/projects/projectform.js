@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react"
-import {Button, Modal, Form, Tabs, Tab, Row, Col} from "react-bootstrap"
+import {Button, Modal, Form, Tabs, Tab, Row, Col, Alert} from "react-bootstrap"
 import ButtonLoader from "../../components/form/ButtonLoader"
 import { useForm, Controller } from "react-hook-form"
 import ReactSelect  from "react-select"
@@ -7,18 +7,19 @@ import RangeSlider from 'react-bootstrap-range-slider'
 import DateTimeInput from "../../components/form/DateTimeInput"
 import user from "../../services/users"
 import ApiService, {getCSRFCookie} from "../../services/ApiService"
-import project from "./store/reducers/projectReducer";
+//import project from "./store/reducers/projectReducer";
 //import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.scss'
 
 const ProjectForm  =(props)=>{
-    const title = props.project ? 'Edit Project' : 'Add Project'
     const defaultValues = {...props.project}
+    const title = defaultValues.id ? 'Edit Project' : 'Add Project'
 
     const [processing, setProcessing] = useState(0)
+    const [validationMessage, setValidationMessage] = useState("")
     const [progress, setProgress] = useState(defaultValues.progress)
 
     const activeTab = "description";
-    const { register, handleSubmit, control, errors} = useForm({defaultValues:defaultValues});
+    const { register, handleSubmit, control, errors, setError} = useForm({defaultValues:defaultValues});
     const [users, setUsers] = useState([])
 
     useEffect(()=>{
@@ -33,10 +34,17 @@ const ProjectForm  =(props)=>{
         await getCSRFCookie().catch(exp=>{
             console.log(exp)
         })
-        await ApiService.post("projects", post_data).then(res=>{
-
+        const url = defaultValues.id ? "projects/"+props.project.id : "projects"
+        const method = defaultValues.id ? "PUT" : "POST"
+        await ApiService({method:method, url:url, data:post_data}).then(res=>{
+            setValidationMessage("")
         }).catch(exp=>{
-            console.log({...exp.response.data})
+            let data = exp.response.data
+            setValidationMessage(data.message)
+            let validationErrors = data.errors
+            for(const key in validationErrors){
+                setError(key, {type: "server", message:validationErrors[key]})
+            }
         }).finally(()=>{
             setProcessing(false)
         })
@@ -52,6 +60,9 @@ const ProjectForm  =(props)=>{
 
                 <Modal.Body>
                         <form action="" className="form-horizontal" onSubmit={handleSubmit(submitForm)}>
+                            {validationMessage && (
+                                <Alert variant={'danger'}>{validationMessage}</Alert>
+                            )}
                             <Form.Group>
                                 <Form.Label>Project title is:</Form.Label>
                                 <Form.Control
@@ -59,7 +70,7 @@ const ProjectForm  =(props)=>{
                                     ref={register({required:true})}
                                     isInvalid={errors.name}
                                     placeholder={'like react application'}/>
-                                <Form.Control.Feedback type={'invalid'}>Required</Form.Control.Feedback>
+                                <Form.Control.Feedback type={'invalid'}>{errors.name && errors.name.message}</Form.Control.Feedback>
                             </Form.Group>
                             <div className="nav-htabs">
                                 <Tabs defaultActiveKey={activeTab} id="project_form_tabs">
