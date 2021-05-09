@@ -12,7 +12,7 @@ const settings = {
     setTitle: (t)=>{
         document.title = t ? t + ' - '+ title :  title;
     },
-    NOTIFY: {
+    NOTIFICATION: {
         insert: "bottom",
         container: "bottom-right",
         animationIn: ["animated", "fadeIn"],

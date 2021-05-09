@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import { Route, Switch } from "react-router-dom"
 import { withSanctum } from "react-sanctum"
+import ReactNotification from 'react-notifications-component'
 import Header from "./header/header"
 import Guest from "./header/guest"
 import routesLit from "./../routes"
@@ -29,6 +30,7 @@ const Layout = ({ authenticated, user, signOut })=>{
 
     return(
         <div className={classes.join(' ')}>
+            <ReactNotification />
             {header}
             <Exception />
             <div id={'page-container'} className="content animate-panel">
