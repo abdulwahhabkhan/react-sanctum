@@ -7,8 +7,6 @@ import RangeSlider from 'react-bootstrap-range-slider'
 import DateTimeInput from "../../components/form/DateTimeInput"
 import user from "../../services/users"
 import ApiService, {getCSRFCookie} from "../../services/ApiService"
-import {store as notification} from 'react-notifications-component'
-import settings from "../../config/settings"
 
 //import project from "./store/reducers/projectReducer";
 //import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.scss'
@@ -41,13 +39,7 @@ const ProjectForm  =(props)=>{
         const method = defaultValues.id ? "PUT" : "POST"
         await ApiService({method:method, url:url, data:post_data}).then(res=>{
             setValidationMessage("")
-            /*notification.addNotification({
-                ...settings.NOTIFICATION,
-                type: 'success',
-                title: "Success",
-                message: "Project save successfully"
-            });*/
-            props.onClose(false)
+            props.onClose(false, true)
         }).catch(exp=>{
             let data = exp.response.data
             setValidationMessage(data.message)

@@ -10,6 +10,8 @@ import {useDispatch, useSelector} from "react-redux"
 import {getProjects, applyOrder, applySort} from "./store/actions";
 import {LoadingSpinner} from "../../components/ui/loader";
 import ApiService from "../../services/ApiService";
+import {store as notification} from "react-notifications-component";
+import settings from "../../config/settings";
 
 const ProjectForm = lazy(() => import("./projectform"))
 //import ApiService from "../../services/ApiService";
@@ -73,9 +75,18 @@ const Projects = ()=>{
     const editProjectHandler = (projectId)=>{
         getProject(projectId)
     }
-    const projectFormHandler = (flag)=>{
+    const projectFormHandler = (flag, update)=>{
         setProject([])
         setShowForm(flag)
+        console.log(update)
+        if(update !== undefined){
+            notification.addNotification({
+                ...settings.NOTIFICATION,
+                type: 'success',
+                title: "Success",
+                message: "Project save successfully"
+            });
+        }
     }
     const deleteProjectHandler = (id)=>{
         //ask for confirmation and delete the project
