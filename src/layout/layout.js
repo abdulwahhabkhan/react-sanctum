@@ -7,13 +7,16 @@ import Guest from "./header/guest"
 import routesLit from "./../routes"
 import LayoutContext from "./LayoutContext";
 import Exception from "../components/ui/exceptionmodal";
+import {Redirect, useLocation} from "react-router";
 
 const Layout = ({ authenticated, user, signOut })=>{
+    const location = useLocation()
     let header = authenticated ? <Header user={user} logout={signOut} /> : <Guest />
     const toggleSidebar= ()=>{
         setSidebarMinified(!sidebarMinified)
     }
     const [sidebarMinified, setSidebarMinified] =useState(false)
+    const noAuthRoutes = ['/', '/login']
     if(authenticated === null){
         return (
             <div className="full-screen-loader">
@@ -21,6 +24,18 @@ const Layout = ({ authenticated, user, signOut })=>{
                     <div className="cssload-whirlpool" />
                 </div>
             </div>
+        )
+    }
+
+    if(authenticated === false && noAuthRoutes.indexOf(location.pathname) < 0){
+        return(
+            <Redirect
+                to={{
+                    pathname: "/login",
+                    search: "",
+                    state: { referrer: location.pathname }
+                }}
+            />
         )
     }
     const classes = [
